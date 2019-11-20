@@ -129,7 +129,14 @@ export default class MapScreen extends Component {
 
         else {
 
-            alert("Digite o destino ! ")
+              Geocoder.from(this.state.origin)
+                                        .then(json => {
+                                            var location = json.results[0].geometry.location;
+                                            console.log(location);
+                                            this.setState({ origin: { latitude: location.lat, longitude: location.lng } });
+
+                                    })
+                                    .catch(error => console.warn(error));
 
         }
 
